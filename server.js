@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { add, subtract, multiply, divide } = require('./math.js');
 
 // Définir le dossier des vues et le moteur de templates
 app.set('views', path.join(__dirname, 'views'));
@@ -31,13 +32,13 @@ app.post('/calculate', (req, res) => {
 
   switch (operation) {
       case 'add':
-          result = n1 + n2;
+          result = add();
           break;
       case 'subtract':
-          result = n1 - n2;
+          result = subtract();
           break;
       case 'multiply':
-          result = n1 * n2;
+          result = multiply();
           break;
       case 'divide':
           result = n1 / n2;
