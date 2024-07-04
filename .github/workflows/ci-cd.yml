@@ -27,6 +27,8 @@ jobs:
      # Étape 4: Vérifier l'installation de Jest
     - name: Verify Jest installation
       run: npm list jest
+       ls -l $(which jest)
+       ls -l node_modules/.bin
 
     # Étape 5: Exécuter les tests
     - name: Run tests
