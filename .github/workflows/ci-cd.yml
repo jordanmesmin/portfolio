@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Changez cela en fonction de votre branche principale
+      - main
 
 jobs:
   build:
@@ -18,18 +18,15 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # Utilisez la version Node.js que vous utilisez
+        node-version: '20'
 
     # Étape 3: Installer les dépendances
     - name: Install dependencies
       run: npm install
 
-     # Étape 4: Vérifier l'installation de Jest
-    - name: Verify Jest installation
-      run: 
-       ls -l $(which jest)
-       ls -l node_modules/.bin
-       npm list jest
+    # Étape 4: Modifier les permissions des fichiers dans node_modules/.bin
+    - name: Fix permissions
+      run: chmod +x node_modules/.bin/*
 
     # Étape 5: Exécuter les tests
     - name: Run tests
