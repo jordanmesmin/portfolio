@@ -24,16 +24,20 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Étape 4: Exécuter les tests
+     # Étape 4: Vérifier l'installation de Jest
+    - name: Verify Jest installation
+      run: npm list jest
+
+    # Étape 5: Exécuter les tests
     - name: Run tests
       run: npm test
 
-    # Étape 5: Construire l'image Docker
+    # Étape 6: Construire l'image Docker
     - name: Build Docker image
       run: |
         docker build -t my-node-app .
 
-    # Étape 6: Pousser l'image Docker vers Docker Hub
+    # Étape 7: Pousser l'image Docker vers Docker Hub
     - name: Push Docker image
       env:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
@@ -43,7 +47,7 @@ jobs:
         docker tag my-node-app $DOCKER_HUB_USERNAME/my-node-app:latest
         docker push $DOCKER_HUB_USERNAME/my-node-app:latest
 
-    # Étape 7: Déployer l'image (optionnel)
+    # Étape 8: Déployer l'image (optionnel)
     - name: Deploy to server
       run: |
         echo "Deploying to server..."
